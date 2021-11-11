@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/tharunyareddy/micro-config-repo.git
+          
+server:  port: 8888
+  

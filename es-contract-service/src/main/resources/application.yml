@@ -1,0 +1,26 @@
+server:
+  port: 8070
+  
+eureka:
+  client:
+    service-url:
+     default-zone: http://localhost:8761/
+     
+#spring:
+#  datasource:
+#   username: root
+#   url: jdbc:mysql://localhost:3306/easyservicedb
+#   password: root
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5Dialect
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#  application:
+#    name: CONTRACTOR-SERVICE
+#
+spring:
+  application:
+    name: CONTRACTOR-SERVICE
+  config:
+    import: configserver:http://localhost:8888

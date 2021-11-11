@@ -1,0 +1,49 @@
+server:
+  port: 9000
+  
+eureka:
+  client:
+    service-url:
+     default-zone: http://localhost:8761
+     
+#http://localhost:9000/task-service/task
+#http://localhost:9000/work-service/work
+#http://localhost:9000/contractor-service/contracts
+#http://localhost:9000/maintenance-service/maintenance
+
+spring:
+  application:
+   name: GATEWAY-SERVICE
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders:
+              - content-type
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+      - id: contractService
+        uri: lb://CONTRACTOR-SERVICE
+        predicates:
+        - Path=/contractor-service/**
+        
+      - id: maintenanceService
+        uri: lb://MAINTENANCE-SERVICE
+        predicates:
+        - Path=/maintenance-service/**
+        
+      - id: taskService/**
+        uri: lb://TASK-SERVICE
+        predicates:
+        - Path=/task-service/**
+        
+      - id: workService/**
+        uri: lb://WORKER-SERVICE
+        predicates:
+        - Path=/work-service/**
